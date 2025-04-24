@@ -320,7 +320,7 @@
             }
         }
         /* Mission, Tech Stack and Contacts Styles */
-.mission, .tech-stack, .contacts {
+.mission, .tech-stack, .contacts, .faq {
     padding: 4rem 2rem;
     position: relative;
     z-index: 5;
@@ -418,6 +418,77 @@ h2 {
     color: transparent;
 
 }
+
+    /* FAQ Styles */
+    .security-faq {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .security-faq h3 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .faq-item {
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .faq-question {
+        width: 100%;
+        text-align: left;
+        padding: 1.2rem 1.5rem;
+        background: var(--light);
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover {
+        background: #e2e2ff;
+    }
+    
+    .faq-question i {
+        transition: transform 0.3s ease;
+    }
+    
+    .faq-question.active i {
+        transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        background: white;
+    }
+    
+    .faq-answer.active {
+        padding: 1.5rem;
+        max-height: 500px;
+    }
+    
+    @media (max-width: 768px) {
+        .security-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .access-levels {
+            grid-template-columns: 1fr;
+        }
+    }
     </style>
 </head>
 <body>
@@ -506,6 +577,38 @@ h2 {
     </div>
 </section>
 
+<section class="faq">
+    <div class="security-faq">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+            <button class="faq-question">Why isn't Izentia on the Web? <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Izentia is not right now on the web, because we value the user's privacy above all else and in the moment the platform is not protected enough to be hosted or deployed and the platform is not yet finished. If you wish to contribute and help us out - you can do so from our github!</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">When will Izentia be published on the web? <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Izentia will be published on the web as fast as we can. Be sure to check out our social media accounts for updates! </p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Can I delete my data? <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Yes, absolutely, you can permanently delete your account and all associated data through the Profile Settings page. Deletion is immediate for active data and occurs within 30 days for all backups.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">How can I contribute? <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>You can contribute from our github by making a requiest or contact us via our email.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Contacts Section -->
 <section class="contacts">
     <div class="section-container">
@@ -526,6 +629,31 @@ h2 {
         </div>
     </div>
 </section>
+<script>
+    // FAQ functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Close all other FAQs
+                faqQuestions.forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Open clicked one if it wasn't active
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+    });
+</script>
         <!-- Footer -->
         <footer>
             <p>&copy; 2025 Izentia. All rights reserved.</p>

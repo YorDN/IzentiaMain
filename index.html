@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izentia - Modern Web Solution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background elements */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 2s;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        /* Header styles */
+        header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .github-btn {
+            background-color: var(--dark);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            opacity: 0.8;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .cta-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+            opacity: 0;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        /* Single large app showcase */
+        .app-showcase {
+            padding: 0 2rem 4rem;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .app-image-container {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .app-image-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .app-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .app-image-container:hover .app-image {
+            transform: scale(1.03);
+        }
+        
+        /* About section */
+        .about {
+            padding: 4rem 2rem;
+            background-color: white;
+            border-radius: 30px 30px 0 0;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.05);
+        }
+        
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .member {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            width: 250px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .member:nth-child(1) { transition-delay: 0.1s; }
+        .member:nth-child(2) { transition-delay: 0.2s; }
+        .member:nth-child(3) { transition-delay: 0.3s; }
+        .member:nth-child(4) { transition-delay: 0.4s; }
+        
+        .member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .member h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark);
+            color: white;
+            position: relative;
+            z-index: 5;
+        }
+        
+        footer p {
+            opacity: 0.7;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .member {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        /* Mission, Tech Stack and Contacts Styles */
+.mission, .tech-stack, .contacts {
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 5;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.mission {
+    background-color: var(--light);
+}
+
+.mission p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.tech-stack {
+    background-color: white;
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 120px;
+}
+
+.tech-item i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.contacts {
+    background-color: var(--primary);
+    color: white;
+}
+
+.contact-methods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.contact-item a:hover {
+    opacity: 0.8;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.contacts h2 {
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated background elements -->
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+        
+        <!-- Header with logo and GitHub link -->
+        <header>
+            <div class="logo">Izen<span>tia</span></div>
+            <a href="https://github.com/YorDN/Izentia.git" class="github-btn" target="_blank">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </header>
+        
+        <!-- Hero section -->
+        <section class="hero">
+            <h1>Revolutionizing Your Digital Experience</h1>
+            <p>Izentia is a <strong>open-source</strong> physical and psychological tests digital hub designed to streamline your health concern and enhance your well-being with intuitive features and a modern interface.</p>
+            <a href="#app-showcase" class="cta-btn">Explore the App</a>
+        </section>
+        
+        <!-- Single large app showcase section -->
+        <section class="app-showcase" id="app-showcase">
+            <div class="app-image-container">
+                <!-- Replace this with an actual image from your website -->
+                <img src="images/Home (1).png" alt="Izentia App Showcase" class="app-image">
+            </div>
+        </section>
+        
+        <!-- About section -->
+        <section class="about">
+            <h2>Our Team</h2>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-icon">A</div>
+                    <h3>Adriano Djermanski</h3>
+                    <p>Research & Support</p>
+                </div>
+                <div class="member">
+                    <div class="member-icon">Y</div>
+                    <h3>Yordan Yordanov</h3>
+                    <p>Founder & Lead Developer (frontend & backend) </p>
+                </div>
+                <div class="member">
+                    <div class="member-icon">L</div>
+                    <h3>Lyubomir Kostadinov</h3>
+                    <p>Backend & Database engineer</p>
+                </div>
+                <div class="member">
+                    <div class="member-icon">M</div>
+                    <h3>Martin Mitev</h3>
+                    <p>Research & Marketing</p>
+                </div>
+            </div>
+        </section>
+        <!-- Add this after the About section but before the Footer -->
+
+<!-- Mission Section -->
+<section class="mission">
+    <div class="section-container">
+        <h2>Our Mission</h2>
+        <p>Our mission is to develop an open-source platform for health tests. We want the platform to be as accessable as possible and thus we are sorry that at the moment it is not hosted at the moment. Be sure to check our social media accounts for updates</p>
+    </div>
+</section>
+
+<!-- Tech Stack Section -->
+<section class="tech-stack">
+    <div class="section-container">
+        <h2>Our Technology</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <i class="fas fa-window-maximize"></i>
+                <span>Blazor</span>
+            </div>
+            <div class="tech-item">
+                <i class="fas fa-database"></i>
+                <span>MS SQL</span>
+            </div>
+            <div class="tech-item">
+                <i class="fab fa-microsoft"></i>
+                <span>.NET</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contacts Section -->
+<section class="contacts">
+    <div class="section-container">
+        <h2>Get In Touch</h2>
+        <div class="contact-methods">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:contact@izentia.com">contact@izentia.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-github"></i>
+                <a href="https://github.com/YorDN/Izentia.git" target="_blank">github.com/YorDN/Izentia</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Dupnitsa, Bulgaria</span>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Izentia. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Animation on scroll functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observe app image container for animation
+            const appImageContainer = document.querySelector('.app-image-container');
+            const teamMembers = document.querySelectorAll('.member');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            observer.observe(appImageContainer);
+            
+            teamMembers.forEach(member => {
+                observer.observe(member);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
